@@ -1,0 +1,45 @@
+version: '3.4'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=123456aA
+    volumes:
+      - ./.containers/mssql:/var/opt/mssql/data
+    ports:
+      - 1433:1433    
+    networks:
+      - homeverse-network
+
+  redis:
+    image: redis:latest
+    volumes:
+      - ./.containers/redis:/data
+    ports:
+      - 6379:6379
+    networks:
+      - homeverse-network
+
+  homeverse-be:
+    # image: ducna0610/homeverse-be
+    image: homeverse-be:1.0.0
+    ports:
+      - 5004:8080
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - homeverse-network
+
+  homeverse-fe:
+    # image: ducna0610/homeverse-fe
+    image: homeverse-fe:1.0.0
+    ports:
+      - 80:80
+    networks:
+      - homeverse-network
+
+networks:
+  homeverse-network:
+    driver: bridge

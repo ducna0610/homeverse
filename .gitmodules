@@ -1,0 +1,6 @@
+[submodule "homeverse-fe"]
+	path = homeverse-fe
+	url = https://github.com/ducna0610/homeverse-fe.git
+[submodule "homeverse-be"]
+	path = homeverse-be
+	url = https://github.com/ducna0610/homeverse-be.git
